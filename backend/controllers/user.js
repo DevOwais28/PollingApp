@@ -26,12 +26,6 @@ const createUser = async (req, res) => {
     
     const newUser = await User.create(userObj);
     
-    // Generate JWT token
-    const token = jwt.sign(
-      { id: newUser._id, email: newUser.email },
-      secret,
-      { expiresIn: '1d' }
-    );
     
     return res.status(201).send({
       success: true,
@@ -40,8 +34,7 @@ const createUser = async (req, res) => {
         id: newUser._id,
         name: newUser.name,
         email: newUser.email
-      },
-      token
+      }  
     });
     
   } catch (error) {
